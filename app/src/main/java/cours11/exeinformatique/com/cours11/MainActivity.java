@@ -17,5 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private void setObjectToDisplay(){
         Bitmap planBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.plan);
         PlanView planView = findViewById(R.id.planView);
+        planView.addElementToDisplay(new Plan(planBitmap));
     }
 }
