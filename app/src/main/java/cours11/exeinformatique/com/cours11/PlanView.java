@@ -1,6 +1,8 @@
 package cours11.exeinformatique.com.cours11;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -100,7 +102,6 @@ public class PlanView extends View {
             return true;
         }
     }
-
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
@@ -109,5 +110,28 @@ public class PlanView extends View {
             invalidate();
             return true;
         }
+        @Override
+        public boolean onDown(MotionEvent event) {
+            return true;
+        }
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            // onClick
+            return true;
+        }
+        @Override
+        public void onLongPress(MotionEvent event) {
+            AddMarker((int) event.getX(), (int) event.getY());
+            super.onLongPress(event);
+        }
+    }
+
+    private void AddMarker(int positionX, int positionY){
+        Bitmap marqueurBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pinpoint);
+        addElementToDisplay(new Marqueur(
+                    marqueurBitmap,
+                    (int) (positionX / zoomLevel),
+                    (int) (positionY / zoomLevel)
+                ));
     }
 }
